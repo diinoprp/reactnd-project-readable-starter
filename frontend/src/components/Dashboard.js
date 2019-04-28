@@ -6,12 +6,13 @@ import '../App.scss';
 
 class Dashboard extends Component {
   render() {
-    console.log(this.props.postIds)
+    const { posts } = this.props
     return (
       <Container className="dashboard-container">
-        {this.props.postIds.map((id) => (
-          <Post key={id} id={id} />
-        ))}
+        {posts && posts.length ? (
+          posts.map((post) => (
+          <Post key={post.id} id={post.id} />
+        ))) : <h1>No posts found</h1>}
       </Container>
     )
   }
@@ -20,9 +21,7 @@ class Dashboard extends Component {
 function mapStateToProps({ postsReducer }) {
   const { posts } = postsReducer
   return {
-    //  postIds: Object.keys(posts)
-    //   .sort((a, b) => posts[b].timestamp - posts[a].timestamp)
-    postIds: posts.map(post => post.id)
+    posts
   }
 }
 

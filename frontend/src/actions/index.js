@@ -14,7 +14,19 @@ export const handleReceivePosts = () => dispatch => {
     .then(posts => dispatch(receivePosts(posts)))
 }
 
-export function votePost (post) {
+function receivePost(post) {
+  return {
+    type: actions.RECEIVE_POST,
+    post
+  }
+}
+
+export const handleReceivePost = (id) => dispatch => {
+  API.getPost(id)
+    .then(post => dispatch(receivePost(post)))
+}
+
+function votePost (post) {
   return {
     type: actions.VOTE_POST,
     post
@@ -24,6 +36,18 @@ export function votePost (post) {
 export const handleVotePost = (id, vote) => dispatch => (
   API.votePost(id, vote)
     .then(post => dispatch(votePost(post)))
+)
+
+function voteComment(comment) {
+  return {
+    type: actions.VOTE_COMMENT,
+    comment
+  }
+}
+
+export const handleVoteComment = (id, vote) => dispatch => (
+  API.voteComment(id, vote)
+    .then(comment => dispatch(voteComment(comment)))
 )
 
 // Shared
@@ -54,5 +78,17 @@ function receivePostsByCategory (posts = []) {
   return {
     type: actions.RECEIVE_POSTS_BY_CATEGORY,
     posts
+  }
+}
+
+export const handleReceiveCommentsByPost = (post_id) => dispatch => (
+  API.getCommentsByPost(post_id)
+    .then(comments => dispatch(receiveCommentsByPost(comments)))
+)
+
+function receiveCommentsByPost(comments) {
+  return {
+    type: actions.RECEIVE_COMMENTARIES_BY_POST,
+    comments
   }
 }

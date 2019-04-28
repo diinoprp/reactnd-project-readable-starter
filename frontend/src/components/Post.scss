@@ -8,7 +8,6 @@ body {
 
 .inline-block {
   display: inline-block;
-  margin: 0 10px 0 10px;
 }
 
 .container {
@@ -33,17 +32,21 @@ body {
   .post-card-body{
     background-color: #161617;
   }
-
-  .post-card-footer{
-    padding: 5px 0 5px 0;
-  }
 }
 
 .react-icons {
   vertical-align: middle;
-  margin: 0 7px 0 7px;
 }
 
 .btn {
   color:white !important;
+  padding: 0 !important;
+}
+
+.card-footer {
+  padding: 10px !important;
+}
+
+.post-score {
+  margin-right: 15px;
 }

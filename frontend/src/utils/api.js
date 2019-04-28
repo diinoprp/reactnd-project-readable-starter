@@ -5,8 +5,17 @@ const headers = {
   'Authorization': 'Reddit-Clone'
 }
 
-export const getPosts = (posts) =>
+export const getPosts = () =>
   fetch(`${url}/posts`, { headers })
+    .then(res => {
+      if (res.status === 200)
+        return res.json()
+      else
+        throw new Error(res.statusText)
+    })
+
+export const getPost = (id) =>
+  fetch(`${url}/posts/${id}`, { headers })
     .then(res => {
       if (res.status === 200)
         return res.json()
@@ -57,3 +66,28 @@ export const getInitialData = () => {
     categories
   }))
 }
+
+export const getCommentsByPost = (post_id) =>
+  fetch(`${url}/posts/${post_id}/comments`, { headers })
+    .then(res => {
+      if (res.status === 200)
+        return res.json()
+      else
+        throw new Error(res.statusText)
+    })
+
+export const voteComment = (id, vote) =>
+  fetch(`${url}/comments/${id}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ option: vote })
+  })
+    .then(res => {
+      if (res.status === 200) {
+        return res.json()
+      } else
+        throw new Error(res.statusText)
+    })

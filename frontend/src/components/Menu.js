@@ -6,7 +6,6 @@ import { withRouter } from 'react-router'
 
 const Menu = (props) => {
   const { pathname } = props.location
-  console.log(pathname)
   return (
     <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
       <Link to='/'>
