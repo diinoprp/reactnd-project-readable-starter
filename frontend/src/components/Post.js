@@ -6,8 +6,16 @@ import Score from './Score';
 import { TiMessage } from 'react-icons/ti'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { handleVotePost } from '../actions'
+
 
 class Post extends Component {
+
+  votePost(id, vote) {
+    this.props.dispatch(handleVotePost(id, vote))
+  }
+
+
   render() {
     const { post } = this.props
     const {
@@ -37,7 +45,7 @@ class Post extends Component {
           </Card.Text>
         </Card.Body>
         <Card.Footer className="post-card-footer">
-          <Score type='Post' id={id} voteScore={voteScore} />
+          <Score type='Post' id={id} voteScore={voteScore} voteFunction={this.votePost.bind(this)} />
           <Link to={`/${category}/${this.props.id}`}>
             <div className='post-comments inline-block'>
               <button

@@ -1,15 +1,9 @@
 import React, { Component } from 'react'
 import { TiArrowUp, TiArrowDown } from "react-icons/ti";
-import { handleVotePost, handleVoteComment } from '../actions'
-import { connect } from 'react-redux'
 
 class Score extends Component {
   handleVote = (id, vote) => {
-    const { type } = this.props
-    if (type === 'Comment')
-      this.props.dispatch(handleVoteComment(id, vote))
-    else if (type === 'Post')
-      this.props.dispatch(handleVotePost(id, vote))
+    this.props.voteFunction(id, vote)
   }
 
   render() {
@@ -28,4 +22,4 @@ class Score extends Component {
   }
 }
 
-export default connect()(Score)
+export default Score

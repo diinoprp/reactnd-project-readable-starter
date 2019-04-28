@@ -2,8 +2,14 @@ import React, { Component } from 'react'
 import { Card } from 'react-bootstrap'
 import Score from './Score'
 import ReactTimeAgo from 'react-time-ago'
+import { handleVoteComment } from '../actions'
+import { connect } from 'react-redux'
 
 class Comment extends Component {
+  voteComment(id, vote) {
+    this.props.dispatch(handleVoteComment(id, vote))
+  }
+
   render() {
     const { comment } = this.props
     const {
@@ -18,11 +24,11 @@ class Comment extends Component {
           {body}
         </Card.Body>
         <Card.Footer>
-          <Score id={comment.id} voteScore={voteScore} type={`Comment`} />
+          <Score id={comment.id} voteScore={voteScore} type={`Comment`} voteFunction={this.voteComment.bind(this)} />
         </Card.Footer>
       </Card>
     )
   }
 }
 
-export default Comment
+export default connect()(Comment)
