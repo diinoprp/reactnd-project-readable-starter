@@ -17,10 +17,10 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps({ postsReducer }) {
-  console.log(postsReducer)
+  const { posts } = postsReducer
   return {
-    postIds: Object.keys(postsReducer)
-      .sort((a, b) => postsReducer[b].timestamp - postsReducer[a].timestamp)
+     postIds: Object.keys(posts)
+      .sort((a, b) => posts[b].timestamp - posts[a].timestamp)
   }
 }
 

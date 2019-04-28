@@ -1,5 +1,5 @@
 import * as actions from './Types'
-import { getInitialData, getPostsByCategory, getPosts } from '../utils/api'
+import * as API from '../utils/api'
 
 // Posts Reducer
 function receivePosts(posts) {
@@ -10,14 +10,26 @@ function receivePosts(posts) {
 }
 
 export const handleReceivePosts = () => dispatch => {
-  getPosts()
+  API.getPosts()
     .then(posts => dispatch(receivePosts(posts)))
 }
+
+export function votePost (post) {
+  return {
+    type: actions.VOTE_POST,
+    post
+  }
+}
+
+export const handleVotePost = (id, vote) => dispatch => (
+  API.votePost(id, vote)
+    .then(post => dispatch(votePost(post)))
+)
 
 // Shared
 export function handleInitialData() {
   return (dispatch) => {
-    return getInitialData()
+    return API.getInitialData()
       .then(({ posts, categories }) => {
         dispatch(receivePosts(posts))
         dispatch(receiveCategories(categories))
@@ -34,7 +46,7 @@ export function receiveCategories(categories) {
 }
 
 export const handleReceivePostsByCategory = (category) => dispatch => (
-  getPostsByCategory(category)
+  API.getPostsByCategory(category)
     .then(posts => dispatch(receivePostsByCategory(posts)))
 )
 

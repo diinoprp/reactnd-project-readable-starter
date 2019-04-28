@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Card } from 'react-bootstrap'
 import ReactTimeAgo from 'react-time-ago'
-import { TiArrowUp, TiArrowDown, TiMessage } from "react-icons/ti";
 import './Post.scss'
+import PostScore from './PostScore';
+import { TiMessage } from 'react-icons/ti'
 
 class Post extends Component {
   render() {
@@ -22,37 +23,24 @@ class Post extends Component {
             </h1>
           </Card.Title>
           <div className="text-muted">
-            <span>Posted by {post.author} </span>
-            <ReactTimeAgo date={post.timestamp} />
+            <span>Posted by {author} </span>
+            <ReactTimeAgo date={timestamp} />
           </div>
 
         </Card.Header>
         <Card.Body className="post-card-body">
           <Card.Text>
-            {post.body}
+            {body}
           </Card.Text>
         </Card.Body>
         <Card.Footer className="post-card-footer">
-          <div className='post-score inline-block'>
-            <button
-              className="btn"
-            >
-              <TiArrowUp className="react-icons" size='2em' />
-            </button>
-            {post.voteScore}
-            <button
-              className="btn"
-            >
-              <TiArrowDown className="react-icons" size='2em' />
-            </button>
-          </div>
-
+          <PostScore post={post}/>
           <div className='post-comments inline-block'>
             <button
               className="btn"
               type="button">
               <TiMessage className="react-icons" size='1.8em' />
-              {post.commentCount} Comments
+              {commentCount} Comments
             </button>
           </div>
         </Card.Footer>
@@ -62,7 +50,7 @@ class Post extends Component {
 }
 
 function mapStateToProps({ postsReducer }, { id }) {
-  const post = postsReducer[id]
+  const post = postsReducer.posts[id]
 
   return {
     post
