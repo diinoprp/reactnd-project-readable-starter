@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Card } from 'react-bootstrap'
 import ReactTimeAgo from 'react-time-ago'
 import { TiArrowUp, TiArrowDown, TiMessage } from "react-icons/ti";
+import './Post.scss'
 
 class Post extends Component {
   render() {
@@ -52,7 +53,7 @@ class Post extends Component {
               type="button">
               <TiMessage className="react-icons" size='1.8em' />
               {post.commentCount} Comments
-                  </button>
+            </button>
           </div>
         </Card.Footer>
       </Card>

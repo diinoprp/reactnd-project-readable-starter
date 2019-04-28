@@ -1,0 +1,49 @@
+body {
+  background-color: black;
+}
+
+.App {
+  text-align: center;
+}
+
+.inline-block {
+  display: inline-block;
+  margin: 0 10px 0 10px;
+}
+
+.container {
+  margin: 0 auto;
+  background-color: black;
+  overflow: hidden;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.post-card {
+  margin: 0 0 20px 0;
+  border-radius: 0;
+  background-color: #1A1A1B;
+  color: white;
+
+  .post-card-title {
+    display: inline-block;
+  }
+
+  .post-card-body{
+    background-color: #161617;
+  }
+
+  .post-card-footer{
+    padding: 5px 0 5px 0;
+  }
+}
+
+.react-icons {
+  vertical-align: middle;
+  margin: 0 7px 0 7px;
+}
+
+.btn {
+  color:white !important;
+}
