@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import NavDropdown from 'react-bootstrap/NavDropdown'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
 import { connect } from 'react-redux'
 import { handleReceivePostsByCategory, handleReceivePosts } from '../actions'
 
@@ -14,27 +16,31 @@ class CategoriesDropdown extends Component {
       this.props.dispatch(handleReceivePosts()) :
       this.props.dispatch(handleReceivePostsByCategory(categoryName))
 
-    this.setState({dropdownTitle: categoryName})
+    this.setState({ dropdownTitle: categoryName })
   }
 
   render() {
     const { categories } = this.props
     const { dropdownTitle } = this.state
     return (
-      <NavDropdown title={dropdownTitle} id="collasible-nav-dropdown">
-        <NavDropdown.Item onClick={() => { this.handleCategoryClick('Categories') }}>
-          All
-        </NavDropdown.Item>
-
-        {(categories && categories.length) &&
-          categories.map((category) => (
-            <NavDropdown.Item
-              key={category.name}
-              onClick={() => { this.handleCategoryClick(category.name) }}>
-              {category.name}
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="mr-auto">
+          <NavDropdown title={dropdownTitle} id="collasible-nav-dropdown">
+            <NavDropdown.Item onClick={() => { this.handleCategoryClick('Categories') }}>
+              All
             </NavDropdown.Item>
-          ))}
-      </NavDropdown>
+            
+            {(categories && categories.length) &&
+              categories.map((category) => (
+                <NavDropdown.Item
+                  key={category.name}
+                  onClick={() => { this.handleCategoryClick(category.name) }}>
+                  {category.name}
+                </NavDropdown.Item>
+              ))}
+          </NavDropdown>
+        </Nav>
+      </Navbar.Collapse>
     )
   }
 }

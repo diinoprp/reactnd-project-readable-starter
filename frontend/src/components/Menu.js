@@ -1,27 +1,28 @@
 import React from 'react'
 import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
 import CategoriesDropdown from './CategoriesDropdown'
+import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router'
 
-const Menu = () => {
+const Menu = (props) => {
+  const { pathname } = props.location
+  console.log(pathname)
   return (
     <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
-      <Navbar.Brand href="/">
-        <img
-          alt=""
-          src={require('../reddit-logo.png')}
-          className="d-inline-block align-top logo"
-        />
-        {'Reddit Clone'}
-      </Navbar.Brand>
+      <Link to='/'>
+        <Navbar.Brand>
+          <img
+            alt=""
+            src={require('../reddit-logo.png')}
+            className="d-inline-block align-top logo"
+          />
+          {'Reddit Clone'}
+        </Navbar.Brand>
+      </Link>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="mr-auto">
-          <CategoriesDropdown />
-        </Nav>
-      </Navbar.Collapse>
+      {pathname === '/' ? <CategoriesDropdown /> : null}
     </Navbar>
   )
 }
 
-export default Menu
+export default withRouter(Menu)

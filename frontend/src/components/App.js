@@ -5,6 +5,7 @@ import { handleInitialData } from '../actions'
 import Menu from './Menu'
 import Dashboard from './Dashboard'
 import '../App.scss';
+import PostDetail from './PostDetail'
 
 class App extends Component {
   componentDidMount() {
@@ -16,6 +17,9 @@ class App extends Component {
       <Router>
         <Menu />
         <Route path='/' exact component={Dashboard} />
+        <Route exact path={`/:category/:post_id`} render={(props) => (
+          <PostDetail {...props}/>
+        )}/>
       </Router>
     );
   }
