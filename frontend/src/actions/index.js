@@ -55,8 +55,8 @@ export function handleInitialData() {
   return (dispatch) => {
     return API.getInitialData()
       .then(({ posts, categories }) => {
-        dispatch(receivePosts(posts))
-        dispatch(receiveCategories(categories))
+        dispatch(handleReceivePosts(posts))
+        dispatch(handleReceiveCategories(categories))
       })
   }
 }
@@ -68,6 +68,12 @@ export function receiveCategories(categories) {
     categories
   }
 }
+
+export const handleReceiveCategories = () => dispatch => (
+  API.getCategories()
+    .then(categories => dispatch(receiveCategories(categories)))
+)
+
 
 export const handleReceivePostsByCategory = (category) => dispatch => (
   API.getPostsByCategory(category)

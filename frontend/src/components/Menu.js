@@ -1,5 +1,7 @@
 import React from 'react'
 import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import Button from 'react-bootstrap/Button'
 import CategoriesDropdown from './CategoriesDropdown'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'

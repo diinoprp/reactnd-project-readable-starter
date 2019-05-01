@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import Post from './Post'
 import { Container } from 'react-bootstrap'
 import '../App.scss';
+import AddPostButton from './AddPostButton'
+import { Link } from 'react-router-dom'
 
 class Dashboard extends Component {
   render() {
@@ -11,8 +13,11 @@ class Dashboard extends Component {
       <Container className="dashboard-container">
         {posts && posts.length ? (
           posts.map((post) => (
-          <Post key={post.id} id={post.id} />
-        ))) : <h1>No posts found</h1>}
+            <Post key={post.id} id={post.id} />
+          ))) : <h1>No posts found</h1>}
+        <Link to='/newPost'>
+          <AddPostButton />
+        </Link>
       </Container>
     )
   }
@@ -21,7 +26,7 @@ class Dashboard extends Component {
 function mapStateToProps({ postsReducer }) {
   const { posts } = postsReducer
   return {
-    posts
+    posts,
   }
 }
 

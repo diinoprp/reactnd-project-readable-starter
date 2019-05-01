@@ -6,6 +6,11 @@ import Menu from './Menu'
 import Dashboard from './Dashboard'
 import '../App.scss';
 import PostDetail from './PostDetail'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import NewPostContainer from '../containers/NewPostContainer';
+
+library.add(faPlus)
 
 class App extends Component {
   componentDidMount() {
@@ -20,6 +25,7 @@ class App extends Component {
         <Route exact path={`/:category/:post_id`} render={(props) => (
           <PostDetail {...props}/>
         )}/>
+        <Route path='/newPost' exact component={NewPostContainer} />
       </Router>
     );
   }
