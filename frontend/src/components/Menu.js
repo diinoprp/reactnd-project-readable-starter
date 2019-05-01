@@ -1,13 +1,12 @@
 import React from 'react'
 import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-import Button from 'react-bootstrap/Button'
 import CategoriesDropdown from './CategoriesDropdown'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
 const Menu = (props) => {
   const { pathname } = props.location
+  const { categories } = props
   return (
     <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
       <Link to='/'>
@@ -21,7 +20,7 @@ const Menu = (props) => {
         </Navbar.Brand>
       </Link>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      {pathname === '/' ? <CategoriesDropdown /> : null}
+      {pathname === '/' ? <CategoriesDropdown categories={categories}/> : null}
     </Navbar>
   )
 }

@@ -20,15 +20,26 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Menu />
-        <Route path='/' exact component={Dashboard} />
+        <Menu categories={this.props.categories} />
+        <Route path='/' exact render={(props) => (
+          <Dashboard {...props} posts={this.props.posts} />
+        )} />
         <Route exact path={`/:category/:post_id`} render={(props) => (
-          <PostDetail {...props}/>
-        )}/>
+          <PostDetail {...props} />
+        )} />
         <Route path='/newPost' exact component={NewPostContainer} />
       </Router>
     );
   }
 }
 
-export default connect()(App);
+function mapStateToProps({ postsReducer, categoriesReducer }) {
+  const { posts } = postsReducer
+  const { categories } = categoriesReducer
+  return {
+    posts,
+    categories
+  }
+}
+
+export default connect(mapStateToProps)(App);

@@ -18,7 +18,6 @@ class NewPostContainer extends Component {
 }
 
 function mapStateToProps({ categoriesReducer }) {
-  console.log(categoriesReducer)
   const { categories } = categoriesReducer
   return {
     categories

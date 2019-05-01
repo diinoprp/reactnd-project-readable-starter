@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import Post from './Post'
 import { Container } from 'react-bootstrap'
 import '../App.scss';
@@ -8,6 +7,7 @@ import { Link } from 'react-router-dom'
 
 class Dashboard extends Component {
   render() {
+    console.log(this.props)
     const { posts } = this.props
     return (
       <Container className="dashboard-container">
@@ -23,11 +23,4 @@ class Dashboard extends Component {
   }
 }
 
-function mapStateToProps({ postsReducer }) {
-  const { posts } = postsReducer
-  return {
-    posts,
-  }
-}
-
-export default connect(mapStateToProps)(Dashboard)
+export default Dashboard
