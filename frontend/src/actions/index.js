@@ -26,7 +26,7 @@ export const handleReceivePost = (id) => dispatch => {
     .then(post => dispatch(receivePost(post)))
 }
 
-function votePost (post) {
+function votePost(post) {
   return {
     type: actions.VOTE_POST,
     post
@@ -80,7 +80,7 @@ export const handleReceivePostsByCategory = (category) => dispatch => (
     .then(posts => dispatch(receivePostsByCategory(posts)))
 )
 
-function receivePostsByCategory (posts = []) {
+function receivePostsByCategory(posts = []) {
   return {
     type: actions.RECEIVE_POSTS_BY_CATEGORY,
     posts
@@ -96,5 +96,17 @@ function receiveCommentsByPost(comments) {
   return {
     type: actions.RECEIVE_COMMENTARIES_BY_POST,
     comments
+  }
+}
+
+export const handleCreatePost = (id, timestamp, title, body, author, category) => dispatch => (
+  API.createPost(id, timestamp, title, body, author, category)
+    .then(post => dispatch(createPost(post)))
+)
+
+function createPost(post) {
+  return {
+    type: actions.CREATE_POST,
+    post
   }
 }

@@ -91,3 +91,19 @@ export const voteComment = (id, vote) =>
       } else
         throw new Error(res.statusText)
     })
+
+export const createPost = (id, timestamp, title, body, author, category) => 
+  fetch(`${url}/posts`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ id, timestamp, title, body, author, category })
+  })
+  .then(res => {
+    if(res.status === 200)
+      return res.json()
+    else
+      throw new Error(res.statusText)
+  })
