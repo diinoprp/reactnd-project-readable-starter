@@ -1,20 +1,17 @@
 import React, { Component } from 'react'
-import { Card } from 'react-bootstrap'
+import { Card, Button } from 'react-bootstrap'
 import ReactTimeAgo from 'react-time-ago'
 import './Post.scss'
 import Score from './Score';
 import { TiMessage } from 'react-icons/ti'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { handleVotePost } from '../actions'
-
+import * as actions from '../actions'
 
 class Post extends Component {
-
   votePost(id, vote) {
-    this.props.dispatch(handleVotePost(id, vote))
+    this.props.dispatch(actions.handleVotePost(id, vote))
   }
-
 
   render() {
     const { post } = this.props
@@ -65,7 +62,6 @@ class Post extends Component {
 
 function mapStateToProps({ postsReducer }, { id }) {
   const post = postsReducer.posts.find(post => post.id === id)
-
   return {
     post
   }

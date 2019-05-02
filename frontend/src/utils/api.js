@@ -92,7 +92,7 @@ export const voteComment = (id, vote) =>
         throw new Error(res.statusText)
     })
 
-export const createPost = (id, timestamp, title, body, author, category) => 
+export const createPost = (id, timestamp, title, body, author, category) =>
   fetch(`${url}/posts`, {
     method: 'POST',
     headers: {
@@ -101,9 +101,40 @@ export const createPost = (id, timestamp, title, body, author, category) =>
     },
     body: JSON.stringify({ id, timestamp, title, body, author, category })
   })
-  .then(res => {
-    if(res.status === 200)
-      return res.json()
-    else
-      throw new Error(res.statusText)
+    .then(res => {
+      if (res.status === 200)
+        return res.json()
+      else
+        throw new Error(res.statusText)
+    })
+
+export const deletePost = (id) =>
+  fetch(`${url}/posts/${id}`, {
+    method: 'DELETE',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
   })
+    .then(res => {
+      if (res.status === 200)
+        return res.json()
+      else
+        throw new Error(res.statusText)
+    })
+
+export const editPost = (id, title, body) =>
+  fetch(`${url}/posts/${id}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ title, body })
+  })
+    .then(res => {
+      if (res.status === 200) 
+        return res.json()
+      else 
+        throw new Error(res.statusText)
+    })

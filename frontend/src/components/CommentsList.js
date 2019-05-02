@@ -22,7 +22,6 @@ class CommentsList extends Component {
 }
 
 function mapStateToProps({ commentsReducer }, { postId }) {
-  console.log(commentsReducer)
   const comments = commentsReducer.comments.filter(comment => comment.parentId === postId)
 
   return {

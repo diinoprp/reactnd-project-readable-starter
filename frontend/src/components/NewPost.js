@@ -73,11 +73,12 @@ class NewPost extends Component {
             />
           </Form.Group>
 
+
           <Button variant="primary" size="lg" block type="submit">
             Submit
-            </Button>
+          </Button>
         </Form>
-      </Container>
+      </Container >
     )
   }
 }

@@ -110,3 +110,27 @@ function createPost(post) {
     post
   }
 }
+
+export const handleDeletePost = (id) => dispatch => (
+  API.deletePost(id)
+    .then(post => dispatch(deletePost(post)))
+)
+
+function deletePost(post) {
+  return {
+    type: actions.DELETE_POST,
+    post
+  }
+}
+
+export function editPost (post) {
+  return {
+    type: actions.EDIT_POST,
+    post
+  }
+}
+
+export const handleEditPost = (id, title, body) => dispatch => (
+  API.editPost(id, title, body)
+    .then(post => dispatch(editPost(post)))
+)

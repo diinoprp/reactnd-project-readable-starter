@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
-import Post from './Post'
 import { Container } from 'react-bootstrap'
 import '../App.scss';
 import AddPostButton from './AddPostButton'
 import { Link } from 'react-router-dom'
+import Post from '../components/Post'
 
 class Dashboard extends Component {
   render() {
-    console.log(this.props)
     const { posts } = this.props
     return (
       <Container className="dashboard-container">
