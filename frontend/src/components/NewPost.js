@@ -83,4 +83,11 @@ class NewPost extends Component {
   }
 }
 
-export default connect()(NewPost)
+function mapsStateToProps({ categoriesReducer }) {
+  const { categories } = categoriesReducer
+  return {
+    categories
+  }
+}
+
+export default connect(mapsStateToProps)(NewPost)

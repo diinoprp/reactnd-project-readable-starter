@@ -3,6 +3,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import CategoriesDropdown from './CategoriesDropdown'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
+import { connect } from 'react-redux'
 
 const Menu = (props) => {
   const { pathname } = props.location
@@ -25,4 +26,11 @@ const Menu = (props) => {
   )
 }
 
-export default withRouter(Menu)
+function mapStateToProps({ categoriesReducer }) {
+  const { categories } = categoriesReducer
+  return {
+    categories
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(Menu))

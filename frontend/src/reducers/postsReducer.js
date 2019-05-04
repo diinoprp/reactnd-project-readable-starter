@@ -1,12 +1,11 @@
 import * as actions from '../actions/Types'
 
 const initialState = {
-  posts: []
+  posts: [],
+  post: null
 }
-
-export default function posts(state = initialState, action) {
-  const { posts } = action
-
+export default function postsReducer(state = initialState, action) {
+  const { posts, post } = action
   switch (action.type) {
     case actions.RECEIVE_POSTS:
       return {
@@ -21,7 +20,7 @@ export default function posts(state = initialState, action) {
       return {
         ...state,
         posts: state.posts.map(currentPost => {
-          return (currentPost.id === action.post.id) ? action.post : currentPost
+          return (currentPost.id === post.id) ? post : currentPost
         })
       }
     default:

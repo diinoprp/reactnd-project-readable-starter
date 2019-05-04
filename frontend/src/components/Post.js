@@ -13,8 +13,17 @@ class Post extends Component {
     this.props.dispatch(actions.handleVotePost(id, vote))
   }
 
+  handleTitleClick(id) {
+    this.props.dispatch(actions.handleReceivePost(id))
+  }
+
   render() {
     const { post } = this.props
+
+    if (post === null) {
+      return <p>This Post doesn't exist</p>
+    }
+
     const {
       author, body, category, commentCount, deleted, id, timestamp, title, voteScore
     } = post
@@ -22,7 +31,7 @@ class Post extends Component {
     return (
       <Card className='post-card'>
         <Card.Header>
-          <Link to={`/${category}/${this.props.id}`}>
+          <Link to={`/${category}/${id}`}>
             <Card.Title>
               <h1>
                 {title}
@@ -61,9 +70,10 @@ class Post extends Component {
 
 
 function mapStateToProps({ postsReducer }, { id }) {
-  const post = postsReducer.posts.find(post => post.id === id)
+  const { posts } = postsReducer
+  const post = posts.find((p) => p.id === id)
   return {
-    post
+    post: post ? post : null
   }
 }
 

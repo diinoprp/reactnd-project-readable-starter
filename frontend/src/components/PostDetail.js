@@ -17,19 +17,26 @@ class PostDetail extends Component {
   }
 
   render() {
-    const postId = this.props.match.params.post_id
+    const { id } = this.props
     return (
       <Container className="dashboard-container">
-
-        <Link to='/newPost'params={{ postId }}>
+        <Link to='/newPost'params={id}>
           <Button style={{ marginRight: 15 }}>Editar</Button>
         </Link>
-        <Button onClick={() => this.deletePost(postId)}>Apagar</Button>
-        <Post key={postId} id={postId} />
-        <CommentsList postId={postId} />
+        <Button onClick={() => this.deletePost(id)}>Apagar</Button>
+        <Post key={id} id={id} />
+        <CommentsList postId={id} />
       </Container>
     );
   }
 }
 
-export default connect()(PostDetail)
+function mapStateToProps({ postsReducer }, props) {
+  const id = props.match.params.post_id
+
+  return {
+    id
+  }
+}
+
+export default connect(mapStateToProps)(PostDetail)
