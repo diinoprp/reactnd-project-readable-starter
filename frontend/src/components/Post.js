@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Button } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import ReactTimeAgo from 'react-time-ago'
 import './Post.scss'
 import Score from './Score';

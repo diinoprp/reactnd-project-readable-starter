@@ -45,4 +45,11 @@ class CategoriesDropdown extends Component {
   }
 }
 
-export default connect()(CategoriesDropdown)
+function mapStateToProps({ categoriesReducer }) {
+  const { categories } = categoriesReducer
+  return {
+    categories
+  }
+}
+
+export default connect(mapStateToProps)(CategoriesDropdown)

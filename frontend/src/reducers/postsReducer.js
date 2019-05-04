@@ -23,6 +23,18 @@ export default function postsReducer(state = initialState, action) {
           return (currentPost.id === post.id) ? post : currentPost
         })
       }
+    case actions.CREATE_POST:
+      return {
+        ...state,
+        posts: state.posts.concat([{ ...post }])
+      }
+    case actions.DELETE_POST:
+      return {
+        ...state,
+        posts: state.posts.filter(currentPost => {
+          return currentPost.id !== post.id
+        })
+      }
     default:
       return state
   }

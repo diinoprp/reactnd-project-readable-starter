@@ -10,14 +10,17 @@ class Dashboard extends Component {
   render() {
     const { postIds } = this.props
     return (
-      <Container className="dashboard-container">
-        {postIds.map((id) => (
-          <Post key={id} id={id} />
-        ))}
-        <Link to='/newPost'>
-          <AddPostButton />
-        </Link>
-      </Container>
+      <>
+        <Container className="dashboard-container">
+          {postIds.length > 0 ? (
+            postIds.map((id) => (
+              <Post key={id} id={id} />
+            ))) : <h1 style={{textAlign: 'center'}}>No posts yet</h1>}
+          <Link to='/newPost'>
+            <AddPostButton />
+          </Link>
+        </Container>
+      </>
     )
   }
 }

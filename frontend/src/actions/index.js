@@ -1,5 +1,6 @@
 import * as actions from './Types'
 import * as API from '../utils/api'
+import { showLoading, hideLoading } from 'react-redux-loading';
 
 // Posts Reducer
 function receivePosts(posts) {
@@ -53,10 +54,12 @@ export const handleVoteComment = (id, vote) => dispatch => (
 // Shared
 export function handleInitialData() {
   return (dispatch) => {
+    dispatch(showLoading())
     return API.getInitialData()
       .then(({ posts, categories }) => {
         dispatch(handleReceivePosts(posts))
         dispatch(handleReceiveCategories(categories))
+        dispatch(hideLoading())
       })
   }
 }
@@ -73,7 +76,6 @@ export const handleReceiveCategories = () => dispatch => (
   API.getCategories()
     .then(categories => dispatch(receiveCategories(categories)))
 )
-
 
 export const handleReceivePostsByCategory = (category) => dispatch => (
   API.getPostsByCategory(category)

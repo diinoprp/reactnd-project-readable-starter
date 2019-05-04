@@ -3,6 +3,7 @@ import { Container, Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux'
 import { handleCreatePost } from '../actions'
 import uuid from "uuid";
+import { Redirect } from 'react-router-dom'
 
 class NewPost extends Component {
   constructor(props) {
@@ -14,7 +15,8 @@ class NewPost extends Component {
       title: '',
       body: '',
       author: '',
-      category: ''
+      category: '',
+      toHome: false
     }
   }
 
@@ -22,10 +24,17 @@ class NewPost extends Component {
     e.preventDefault()
     const { timestamp, title, body, author, category, id } = this.state
     this.props.dispatch(handleCreatePost(id, timestamp, title, body, author, category))
+    this.setState({ toHome: this.props.id ? false : true })
   }
 
   render() {
     const { categories } = this.props
+    const { toHome } = this.state
+
+    if (toHome) {
+      return <Redirect to='/' />
+    }
+
     return (
       <Container className="dashboard-container">
         <h1>Create Post</h1>
@@ -57,9 +66,10 @@ class NewPost extends Component {
               onChange={(e) => this.setState({ category: e.target.value })}
             >
               <option value="" disabled>Category *</option>
-              {categories.map((category) => (
-                <option key={category.name}>{category.name}</option>
-              ))}
+              {(categories && categories.length) &&
+                categories.map((category) => (
+                  <option key={category.name}>{category.name}</option>
+                ))}
             </Form.Control>
           </Form.Group>
 

@@ -3,11 +3,9 @@ import Navbar from 'react-bootstrap/Navbar'
 import CategoriesDropdown from './CategoriesDropdown'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
-import { connect } from 'react-redux'
 
 const Menu = (props) => {
   const { pathname } = props.location
-  const { categories } = props
   return (
     <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
       <Link to='/'>
@@ -21,16 +19,9 @@ const Menu = (props) => {
         </Navbar.Brand>
       </Link>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      {pathname === '/' ? <CategoriesDropdown categories={categories}/> : null}
+      {pathname === '/' ? <CategoriesDropdown/> : null}
     </Navbar>
   )
 }
 
-function mapStateToProps({ categoriesReducer }) {
-  const { categories } = categoriesReducer
-  return {
-    categories
-  }
-}
-
-export default withRouter(connect(mapStateToProps)(Menu))
+export default withRouter(Menu)
