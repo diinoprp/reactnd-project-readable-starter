@@ -15,7 +15,7 @@ class Dashboard extends Component {
           {postIds.length > 0 ? (
             postIds.map((id) => (
               <Post key={id} id={id} />
-            ))) : <h1 style={{textAlign: 'center'}}>No posts yet</h1>}
+            ))) : <h1 style={{ textAlign: 'center' }}>No posts yet</h1>}
           <Link to='/newPost'>
             <AddPostButton />
           </Link>
@@ -27,6 +27,11 @@ class Dashboard extends Component {
 
 function mapStateToProps({ postsReducer }) {
   const { posts } = postsReducer
+  
+  posts.sort(function (a, b) {
+    return b.timestamp - a.timestamp
+  })
+  
   return {
     postIds: posts.map((p) => p.id)
   }

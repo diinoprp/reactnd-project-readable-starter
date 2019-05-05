@@ -7,14 +7,32 @@ import { TiMessage } from 'react-icons/ti'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as actions from '../actions'
+import PostOptions from './PostOptions';
 
 class Post extends Component {
+  constructor(props) {
+    super(props)
+    this.deletePost = this.deletePost.bind(this);
+    this.editPost = this.editPost.bind(this);
+  }
+
   votePost(id, vote) {
     this.props.dispatch(actions.handleVotePost(id, vote))
   }
 
   handleTitleClick(id) {
     this.props.dispatch(actions.handleReceivePost(id))
+  }
+
+  deletePost(id) {
+    console.log('deleting id: ', id)
+    this.props.dispatch(actions.handleDeletePost(id))
+    this.setState({ toHome: true })
+  }
+
+  editPost(id, title, body) {
+    this.props.dispatch(actions.handleEditPost(id, title, body))
+    this.setState({ toHome: true })
   }
 
   render() {
@@ -43,14 +61,13 @@ class Post extends Component {
             <ReactTimeAgo date={timestamp} />
             <span> in {category}</span>
           </div>
-
         </Card.Header>
         <Card.Body className="post-card-body">
           <Card.Text>
             {body}
           </Card.Text>
         </Card.Body>
-        <Card.Footer className="post-card-footer">
+        <Card.Footer className="post-card-footer justify-content-between">
           <Score type='Post' id={id} voteScore={voteScore} voteFunction={this.votePost.bind(this)} />
           <Link to={`/${category}/${this.props.id}`}>
             <div className='post-comments inline-block'>
@@ -59,9 +76,10 @@ class Post extends Component {
                 type="button">
                 <TiMessage className="react-icons" size='1.8em' />
                 {commentCount} Comments
-            </button>
+              </button>
             </div>
           </Link>
+          <PostOptions postId={id} deletePost={this.deletePost} editPost = {this.editPost}/>
         </Card.Footer>
       </Card>
     )
