@@ -10,6 +10,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import NewPost from './NewPost'
 import LoadingBar from 'react-redux-loading'
+import EditPost from './EditPost'
 
 library.add(faPlus)
 
@@ -27,8 +28,9 @@ class App extends Component {
           ? null
           : <>
             <Route exact path='/' component={Dashboard} />
-            <Route exact path={`/:category/:post_id`} component={PostDetail} />
+            <Route exact path={`/postDetail/:post_id`} component={PostDetail} />
             <Route exact path='/newPost' component={NewPost} />
+            <Route exact path={`/editPost/:post_id`} component={EditPost} />
           </>
         }
       </Router>

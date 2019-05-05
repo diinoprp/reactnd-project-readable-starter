@@ -6,6 +6,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { TiEdit, TiTrash } from "react-icons/ti"
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Typography from '@material-ui/core/Typography';
+import { withRouter } from 'react-router-dom'
 
 const ITEM_HEIGHT = 48;
 
@@ -21,8 +22,9 @@ class PostOptions extends React.Component {
   }
 
   handleEditClick = event => {
-    const { postId, editPost } = this.props
-    editPost(postId)
+    const { postId, history } = this.props
+
+    history.push(`/editPost/${postId}`)
     this.setState({ anchorEl: event.currentTarget });
   }
 
@@ -38,7 +40,7 @@ class PostOptions extends React.Component {
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
     return (
-      <div style={{float:'right'}}>
+      <div style={{ float: 'right' }}>
         <IconButton
           aria-label="More"
           aria-owns={open ? 'long-menu' : undefined}
@@ -66,7 +68,7 @@ class PostOptions extends React.Component {
             </ListItemIcon>
             <Typography variant="inherit" noWrap>
               Edit
-          </Typography>
+              </Typography>
           </MenuItem>
 
           <MenuItem onClick={this.handleDeleteClick}>
@@ -79,9 +81,9 @@ class PostOptions extends React.Component {
           </MenuItem>
 
         </Menu>
-      </div>
+      </div >
     );
   }
 }
 
-export default PostOptions;
+export default withRouter(PostOptions);

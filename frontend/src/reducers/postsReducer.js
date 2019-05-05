@@ -35,6 +35,13 @@ export default function postsReducer(state = initialState, action) {
           return currentPost.id !== post.id
         })
       }
+    case actions.EDIT_POST:
+      return {
+        ...state,
+        posts: state.posts.map(currentPost => {
+          return (currentPost.id === post.id) ? post : currentPost
+        })
+      }
     default:
       return state
   }

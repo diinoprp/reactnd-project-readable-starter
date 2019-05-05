@@ -1,34 +1,33 @@
 import React, { Component } from 'react'
 import { Container, Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux'
-import { handleCreatePost } from '../actions'
-import uuid from "uuid";
 import { Redirect } from 'react-router-dom'
+import * as actions from '../actions'
 
-class NewPost extends Component {
+class EditPost extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      id: uuid.v4(),
-      timestamp: (new Date()).getTime(),
       title: '',
       body: '',
-      author: '',
-      category: '',
-      toHome: false
+      toHome: false,
     }
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    const { timestamp, title, body, author, category, id } = this.state
-    this.props.dispatch(handleCreatePost(id, timestamp, title, body, author, category))
-    this.setState({ toHome: this.props.id ? false : true })
+
+    const { post, dispatch } = this.props
+    const title = this.state.title === '' ? post.title : this.state.title
+    const body = this.state.body === '' ? post.body : this.state.body
+
+    dispatch(actions.handleEditPost(post.id, title, body))
+    this.setState({ toHome: true })
   }
 
   render() {
-    const { categories } = this.props
+    const { categories, post } = this.props
     const { toHome } = this.state
 
     if (toHome) {
@@ -37,8 +36,8 @@ class NewPost extends Component {
 
     return (
       <Container className="dashboard-container">
-        <h1>Create Post</h1>
-        <hr style={{backgroundColor: 'white'}} />
+        <h1>Edit Post</h1>
+        <hr style={{ backgroundColor: 'white' }} />
         <Form onSubmit={this.handleSubmit}>
           <Form.Group controlId="postAuthor">
             <Form.Control
@@ -46,6 +45,8 @@ class NewPost extends Component {
               placeholder="Author *"
               required
               onChange={(e) => this.setState({ author: e.target.value })}
+              defaultValue={post ? post.author : ''}
+              disabled
             />
           </Form.Group>
 
@@ -55,6 +56,7 @@ class NewPost extends Component {
               placeholder="Title *"
               required
               onChange={(e) => this.setState({ title: e.target.value })}
+              defaultValue={post ? post.title : ''}
             />
           </Form.Group>
 
@@ -62,8 +64,9 @@ class NewPost extends Component {
             <Form.Control
               as="select"
               required
-              defaultValue=''
               onChange={(e) => this.setState({ category: e.target.value })}
+              value={post ? post.category : ''}
+              disabled
             >
               <option value="" disabled>Category *</option>
               {(categories && categories.length) &&
@@ -80,11 +83,15 @@ class NewPost extends Component {
               placeholder="Text *"
               required
               onChange={(e) => this.setState({ body: e.target.value })}
+              defaultValue={post ? post.body : ''}
             />
           </Form.Group>
 
-
-          <Button variant="primary" size="lg" block type="submit">
+          <Button
+            variant="primary"
+            size="lg"
+            block
+            type="submit">
             Submit
           </Button>
         </Form>
@@ -93,11 +100,15 @@ class NewPost extends Component {
   }
 }
 
-function mapsStateToProps({ categoriesReducer }) {
+function mapsStateToProps({ categoriesReducer, postsReducer }, props) {
   const { categories } = categoriesReducer
+  const id = props.match.params.post_id
+  const { posts } = postsReducer
+  const post = posts.find((p) => p.id === id)
   return {
+    post,
     categories
   }
 }
 
-export default connect(mapsStateToProps)(NewPost)
+export default connect(mapsStateToProps)(EditPost)
