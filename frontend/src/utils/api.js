@@ -133,8 +133,64 @@ export const editPost = (id, title, body) =>
     body: JSON.stringify({ title, body })
   })
     .then(res => {
-      if (res.status === 200) 
+      if (res.status === 200)
         return res.json()
-      else 
+      else
+        throw new Error(res.statusText)
+    })
+
+export const deleteComment = (id) =>
+  fetch(`${url}/comments/${id}`, {
+    method: 'DELETE',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+  })
+    .then(res => {
+      if (res.status === 200)
+        return res.json()
+      else
+        throw new Error(res.statusText)
+    })
+
+export const editComment = (id, body) =>
+  fetch(`${url}/comments/${id}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ body })
+  })
+    .then(res => {
+      if (res.status === 200)
+        return res.json()
+      else
+        throw new Error(res.statusText)
+    })
+
+export const createComment = (id, timestamp, body, author, parentId) =>
+  fetch(`${url}/comments`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ id, timestamp, body, author, parentId })
+  })
+    .then(res => {
+      if (res.status === 200)
+        return res.json()
+      else
+        throw new Error(res.statusText)
+    })
+
+export const getComment = (id) =>
+  fetch(`${url}/comments/${id}`, { headers })
+    .then(res => {
+      if (res.status === 200)
+        return res.json()
+      else
         throw new Error(res.statusText)
     })

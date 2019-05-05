@@ -12,7 +12,6 @@ class CommentsList extends Component {
     const { comments } = this.props
     return (
       <>
-        <h2>Comments:</h2>
         {comments.map((comment) => (
           <Comment key={comment.id} comment={comment} />
         ))}

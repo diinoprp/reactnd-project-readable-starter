@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import { connect } from 'react-redux'
 import { handleReceivePostsByCategory, handleReceivePosts } from '../actions'
+import { Link, withRouter } from 'react-router-dom'
 
 class CategoriesDropdown extends Component {
   constructor(props) {
@@ -12,10 +13,10 @@ class CategoriesDropdown extends Component {
   }
 
   handleCategoryClick(categoryName) {
-    categoryName === 'Categories' ?
-      this.props.dispatch(handleReceivePosts()) :
-      this.props.dispatch(handleReceivePostsByCategory(categoryName))
-
+    //   categoryName === 'Categories' ?
+    //     this.props.dispatch(handleReceivePosts()) :
+    //     this.props.dispatch(handleReceivePostsByCategory(categoryName))
+    this.props.history.push(`/categories/${categoryName}`)
     this.setState({ dropdownTitle: categoryName })
   }
 
@@ -26,10 +27,12 @@ class CategoriesDropdown extends Component {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
           <NavDropdown title={dropdownTitle} id="collasible-nav-dropdown">
-            <NavDropdown.Item onClick={() => { this.handleCategoryClick('Categories') }}>
-              All
+            <Link to='/' style={{ textDecoration: 'none' }}>
+              <NavDropdown.Item>
+                All
             </NavDropdown.Item>
-            
+            </Link>
+
             {(categories && categories.length) &&
               categories.map((category) => (
                 <NavDropdown.Item
@@ -52,4 +55,4 @@ function mapStateToProps({ categoriesReducer }) {
   }
 }
 
-export default connect(mapStateToProps)(CategoriesDropdown)
+export default withRouter(connect(mapStateToProps)(CategoriesDropdown))

@@ -4,15 +4,16 @@ import ReactTimeAgo from 'react-time-ago'
 import './Post.scss'
 import Score from './Score';
 import { TiMessage } from 'react-icons/ti'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as actions from '../actions'
-import PostOptions from './PostOptions';
+import OptionsMenu from './OptionsMenu';
 
 class Post extends Component {
   constructor(props) {
     super(props)
-    this.deletePost = this.deletePost.bind(this);
+    this.handleDeletePost = this.handleDeletePost.bind(this);
+    this.handleEditPost = this.handleEditPost.bind(this);
   }
 
   votePost(id, vote) {
@@ -23,9 +24,13 @@ class Post extends Component {
     this.props.dispatch(actions.handleReceivePost(id))
   }
 
-  deletePost(id) {
+  handleDeletePost(id) {
     this.props.dispatch(actions.handleDeletePost(id))
     this.setState({ toHome: true })
+  }
+
+  handleEditPost(id) {
+    this.props.history.push(`/editPost/${id}`)
   }
 
   render() {
@@ -42,7 +47,7 @@ class Post extends Component {
     return (
       <Card className='post-card'>
         <Card.Header>
-          <Link to={`/postDetail/${id}`}>
+          <Link to={`/postDetail/${id}`} style={{ textDecoration: 'none', color: '#E65100'}}>
             <Card.Title>
               <h1>
                 {title}
@@ -72,7 +77,7 @@ class Post extends Component {
               </button>
             </div>
           </Link>
-          <PostOptions postId={id} deletePost={this.deletePost} editPost = {this.editPost}/>
+          <OptionsMenu contentId={id} deleteContent={this.handleDeletePost} editContent={this.handleEditPost} />
         </Card.Footer>
       </Card>
     )
@@ -88,4 +93,4 @@ function mapStateToProps({ postsReducer }, { id }) {
   }
 }
 
-export default connect(mapStateToProps)(Post)
+export default withRouter(connect(mapStateToProps)(Post))

@@ -4,6 +4,7 @@ const initialState = {
   posts: [],
   post: null
 }
+
 export default function postsReducer(state = initialState, action) {
   const { posts, post } = action
   switch (action.type) {

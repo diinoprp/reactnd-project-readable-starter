@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Post from './Post'
 import { Container } from 'react-bootstrap'
 import CommentsList from './CommentsList'
-import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import NewComment from './NewComment'
 
 class PostDetail extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class PostDetail extends Component {
   }
 
   render() {
-    const { id } = this.props
+    const id = this.props.match.params.post_id
     const { toHome } = this.state
 
     if (toHome) {
@@ -24,18 +24,14 @@ class PostDetail extends Component {
     return (
       <Container className="dashboard-container">
         <Post key={id} id={id} />
+        <hr style={{ backgroundColor: 'white' }} />
+        <h2>Comments:</h2>
+        <NewComment postId={id}/>
+        <hr style={{ backgroundColor: 'white' }} />
         <CommentsList postId={id} />
       </Container>
     );
   }
 }
 
-function mapStateToProps({ postsReducer }, props) {
-  const id = props.match.params.post_id
-
-  return {
-    id
-  }
-}
-
-export default connect(mapStateToProps)(PostDetail)
+export default (PostDetail)

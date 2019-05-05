@@ -25,8 +25,10 @@ class Dashboard extends Component {
   }
 }
 
-function mapStateToProps({ postsReducer }) {
-  const { posts } = postsReducer
+function mapStateToProps({ postsReducer }, props) {
+  const { category } = props.match.params
+
+  const posts = category ? postsReducer.posts.filter(p => p.category === category) : postsReducer.posts
   
   posts.sort(function (a, b) {
     return b.timestamp - a.timestamp

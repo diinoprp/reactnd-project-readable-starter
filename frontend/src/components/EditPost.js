@@ -92,7 +92,7 @@ class EditPost extends Component {
             size="lg"
             block
             type="submit">
-            Submit
+            Save
           </Button>
         </Form>
       </Container >

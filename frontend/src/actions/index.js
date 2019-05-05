@@ -96,7 +96,7 @@ export const handleReceiveCommentsByPost = (post_id) => dispatch => (
 
 function receiveCommentsByPost(comments) {
   return {
-    type: actions.RECEIVE_COMMENTARIES_BY_POST,
+    type: actions.RECEIVE_COMMENTS_BY_POST,
     comments
   }
 }
@@ -125,14 +125,62 @@ function deletePost(post) {
   }
 }
 
-export function editPost (post) {
+export const handleEditPost = (id, title, body) => dispatch => (
+  API.editPost(id, title, body)
+    .then(post => dispatch(editPost(post)))
+)
+
+function editPost (post) {
   return {
     type: actions.EDIT_POST,
     post
   }
 }
 
-export const handleEditPost = (id, title, body) => dispatch => (
-  API.editPost(id, title, body)
-    .then(post => dispatch(editPost(post)))
+export const handleDeleteComment = (id) => dispatch => (
+  API.deleteComment(id)
+    .then(comment => dispatch(deleteComment(comment)))
 )
+
+function deleteComment(comment) {
+  return {
+    type: actions.DELETE_COMMENT,
+    comment
+  }
+}
+
+export const handleEditComment = (id, body) => dispatch => (
+  API.editComment(id, body)
+    .then(comment => dispatch(editComment(comment)))
+)
+
+function editComment(comment) {
+  return {
+    type: actions.EDIT_COMMENT,
+    comment
+  }
+}
+
+export const handleCreateComment = (id, timestamp, body, author, parentId) => dispatch => (
+  API.createComment(id, timestamp, body, author, parentId)
+    .then(comment => dispatch(createComment(comment)))
+)
+
+function createComment(comment) {
+  return {
+    type: actions.CREATE_COMMENT,
+    comment
+  }
+}
+
+export const handleReceiveComment = (id) => dispatch => (
+  API.getComment(id)
+    .then(comment => dispatch(receiveComment(comment)))
+)
+
+function receiveComment(comment) {
+  return {
+    type: actions.RECEIVE_COMMENT,
+    comment
+  }
+}
