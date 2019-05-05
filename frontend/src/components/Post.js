@@ -84,7 +84,6 @@ class Post extends Component {
   }
 }
 
-
 function mapStateToProps({ postsReducer }, { id }) {
   const { posts } = postsReducer
   const post = posts.find((p) => p.id === id)
