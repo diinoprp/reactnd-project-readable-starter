@@ -198,3 +198,17 @@ export function sortPostsByScore(posts) {
     posts
   }
 }
+
+export function sortCommentsByDate(comments) {
+  return {
+    type: actions.SORT_COMMENTS_BY_DATE,
+    comments
+  }
+}
+
+export function sortCommentsByScore(comments) {
+  return {
+    type: actions.SORT_COMMENTS_BY_SCORE,
+    comments
+  }
+}

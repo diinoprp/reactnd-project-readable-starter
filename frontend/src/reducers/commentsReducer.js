@@ -45,6 +45,16 @@ export default function posts(state = initialState, action) {
         ...state,
         comment
       }
+    case actions.SORT_COMMENTS_BY_DATE :
+      return {
+        ...state,
+        comments: state.comments.slice().sort((a, b) => b.timestamp - a.timestamp)
+    }
+    case actions.SORT_COMMENTS_BY_SCORE :
+    return {
+      ...state,
+      comments: state.comments.slice().sort((a, b) => b.voteScore - a.voteScore)
+    }
     default:
       return state
   }
