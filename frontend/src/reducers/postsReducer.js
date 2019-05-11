@@ -2,12 +2,17 @@ import * as actions from '../actions/Types'
 
 const initialState = {
   posts: [],
-  post: null
+  post: {}
 }
 
 export default function postsReducer(state = initialState, action) {
   const { posts, post } = action
   switch (action.type) {
+    case actions.RECEIVE_POST:
+      return {
+        ...state,
+        post
+      }
     case actions.RECEIVE_POSTS:
       return {
         ...state,

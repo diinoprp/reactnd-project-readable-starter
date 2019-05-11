@@ -19,7 +19,7 @@ const Menu = (props) => {
         </Navbar.Brand>
       </Link>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      {pathname === '/' ? <CategoriesDropdown/> : null}
+      {pathname === '/' ? <CategoriesDropdown /> : null}
     </Navbar>
   )
 }

@@ -13,9 +13,6 @@ class CategoriesDropdown extends Component {
   }
 
   handleCategoryClick(categoryName) {
-    //   categoryName === 'Categories' ?
-    //     this.props.dispatch(handleReceivePosts()) :
-    //     this.props.dispatch(handleReceivePostsByCategory(categoryName))
     this.props.history.push(`/categories/${categoryName}`)
     this.setState({ dropdownTitle: categoryName })
   }
@@ -30,7 +27,7 @@ class CategoriesDropdown extends Component {
             <Link to='/' style={{ textDecoration: 'none' }}>
               <NavDropdown.Item>
                 All
-            </NavDropdown.Item>
+              </NavDropdown.Item>
             </Link>
 
             {(categories && categories.length) &&

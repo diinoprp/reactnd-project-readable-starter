@@ -15,6 +15,10 @@ class EditPost extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.dispatch(actions.handleReceivePost(this.props.match.params.post_id))
+  }
+
   handleSubmit = (e) => {
     e.preventDefault()
 
@@ -45,7 +49,7 @@ class EditPost extends Component {
               placeholder="Author *"
               required
               onChange={(e) => this.setState({ author: e.target.value })}
-              defaultValue={post ? post.author : ''}
+              value={post ? post.author : ''}
               disabled
             />
           </Form.Group>
@@ -56,7 +60,7 @@ class EditPost extends Component {
               placeholder="Title *"
               required
               onChange={(e) => this.setState({ title: e.target.value })}
-              defaultValue={post ? post.title : ''}
+              value={this.state.title || post.title}
             />
           </Form.Group>
 
@@ -83,7 +87,7 @@ class EditPost extends Component {
               placeholder="Text *"
               required
               onChange={(e) => this.setState({ body: e.target.value })}
-              defaultValue={post ? post.body : ''}
+              value={this.state.body || post.body}
             />
           </Form.Group>
 
@@ -100,11 +104,9 @@ class EditPost extends Component {
   }
 }
 
-function mapsStateToProps({ categoriesReducer, postsReducer }, props) {
+function mapsStateToProps({ categoriesReducer, postsReducer }) {
   const { categories } = categoriesReducer
-  const id = props.match.params.post_id
-  const { posts } = postsReducer
-  const post = posts.find((p) => p.id === id)
+  const { post } = postsReducer
   return {
     post,
     categories

@@ -41,7 +41,7 @@ class Post extends Component {
     }
 
     const {
-      author, body, category, commentCount, deleted, id, timestamp, title, voteScore
+      author, body, category, commentCount, id, timestamp, title, voteScore
     } = post
 
     return (
