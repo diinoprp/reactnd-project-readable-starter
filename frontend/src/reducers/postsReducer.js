@@ -48,6 +48,16 @@ export default function postsReducer(state = initialState, action) {
           return (currentPost.id === post.id) ? post : currentPost
         })
       }
+    case actions.SORT_POSTS_BY_DATE :
+      return {
+        ...state,
+        posts: state.posts.slice().sort((a, b) => b.timestamp - a.timestamp)
+    }
+    case actions.SORT_POSTS_BY_SCORE :
+    return {
+      ...state,
+      posts: state.posts.slice().sort((a, b) => b.voteScore - a.voteScore)
+    }
     default:
       return state
   }

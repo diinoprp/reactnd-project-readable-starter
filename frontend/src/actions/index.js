@@ -184,3 +184,17 @@ function receiveComment(comment) {
     comment
   }
 }
+
+export function sortPostsByDate(posts) {
+  return {
+    type: actions.SORT_POSTS_BY_DATE,
+    posts
+  }
+}
+
+export function sortPostsByScore(posts) {
+  return {
+    type: actions.SORT_POSTS_BY_SCORE,
+    posts
+  }
+}

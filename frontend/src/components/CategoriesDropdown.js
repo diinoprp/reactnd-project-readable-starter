@@ -3,7 +3,6 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import { connect } from 'react-redux'
-import { handleReceivePostsByCategory, handleReceivePosts } from '../actions'
 import { Link, withRouter } from 'react-router-dom'
 
 class CategoriesDropdown extends Component {

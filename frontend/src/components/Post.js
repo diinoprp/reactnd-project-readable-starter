@@ -4,7 +4,7 @@ import ReactTimeAgo from 'react-time-ago'
 import './Post.scss'
 import Score from './Score';
 import { TiMessage } from 'react-icons/ti'
-import { Link, withRouter } from 'react-router-dom'
+import { Link, withRouter, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as actions from '../actions'
 import OptionsMenu from './OptionsMenu';
@@ -12,6 +12,10 @@ import OptionsMenu from './OptionsMenu';
 class Post extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      toHome: false
+    }
+    
     this.handleDeletePost = this.handleDeletePost.bind(this);
     this.handleEditPost = this.handleEditPost.bind(this);
   }
@@ -35,9 +39,10 @@ class Post extends Component {
 
   render() {
     const { post } = this.props
+    const { toHome } = this.state
 
-    if (post === null) {
-      return <p>This Post doesn't exist</p>
+    if (toHome || !post) {
+      return <Redirect to='/' />
     }
 
     const {
