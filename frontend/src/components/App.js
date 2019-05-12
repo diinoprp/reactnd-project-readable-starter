@@ -9,7 +9,6 @@ import PostDetail from './PostDetail'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import NewPost from './NewPost'
-import LoadingBar from 'react-redux-loading'
 import EditPost from './EditPost'
 import EditComment from './EditComment'
 
@@ -23,28 +22,17 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <LoadingBar />
         <Menu />
-        {this.props.loading
-          ? null
-          : <>
-            <Route exact path='/' component={Dashboard} />
-            <Route exact path='/categories/:category' component={Dashboard} />
-            <Route exact path={`/postDetail/:post_id`} component={PostDetail} />
-            <Route exact path='/newPost' component={NewPost} />
-            <Route exact path={`/editPost/:post_id`} component={EditPost} />
-            <Route exact path={`/editComment/:comment_id`} component={EditComment} />
-          </>
+        <Route exact path='/' component={Dashboard} />
+        <Route exact path='/categories/:category' component={Dashboard} />
+        <Route exact path={`/postDetail/:post_id`} component={PostDetail} />
+        <Route exact path='/newPost' component={NewPost} />
+        <Route exact path={`/editPost/:post_id`} component={EditPost} />
+        <Route exact path={`/editComment/:comment_id`} component={EditComment} />
         }
       </Router>
     );
   }
 }
 
-function mapStateToProps({ authedUser }) {
-  return {
-    loading: authedUser === null
-  }
-}
-
-export default connect(mapStateToProps)(App);
+export default connect()(App);
