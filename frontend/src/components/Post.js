@@ -4,7 +4,7 @@ import ReactTimeAgo from 'react-time-ago'
 import './Post.scss'
 import Score from './Score';
 import { TiMessage } from 'react-icons/ti'
-import { Link, withRouter, Redirect } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as actions from '../actions'
 import OptionsMenu from './OptionsMenu';
@@ -12,10 +12,7 @@ import OptionsMenu from './OptionsMenu';
 class Post extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      toHome: false
-    }
-    
+
     this.handleDeletePost = this.handleDeletePost.bind(this);
     this.handleEditPost = this.handleEditPost.bind(this);
   }
@@ -30,7 +27,7 @@ class Post extends Component {
 
   handleDeletePost(id) {
     this.props.dispatch(actions.handleDeletePost(id))
-    this.setState({ toHome: true })
+    this.props.history.push('/')
   }
 
   handleEditPost(id) {
@@ -39,21 +36,21 @@ class Post extends Component {
 
   render() {
     const { post } = this.props
-    const { toHome } = this.state
 
-    if (toHome || !post) {
-      return <Redirect to='/' />
+    if (!post) {
+      return null
     }
 
     const {
       author, body, category, commentCount, id, timestamp, title, voteScore
     } = post
 
+
     return (
       <Card className='post-card'>
         <Card.Header>
-          <Link to={`/postDetail/${id}`} style={{ textDecoration: 'none', color: '#E65100'}}>
-            <Card.Title>
+          <Link to={`/postDetail/${id}`} style={{ textDecoration: 'none' }}>
+            <Card.Title className='post-card-title'>
               <h1>
                 {title}
               </h1>
@@ -79,7 +76,7 @@ class Post extends Component {
                 type="button">
                 <TiMessage className="react-icons" size='1.8em' />
                 {commentCount} Comments
-              </button>
+                </button>
             </div>
           </Link>
           <OptionsMenu contentId={id} deleteContent={this.handleDeletePost} editContent={this.handleEditPost} />

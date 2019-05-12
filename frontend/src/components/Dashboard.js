@@ -8,13 +8,13 @@ import { connect } from 'react-redux'
 import SortingOptions from './SortingOptions'
 import * as actions from '../actions'
 
-class Dashboard extends Component {  
+class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
       toHome: false
     }
-    
+
     this.handleSortByScore = this.handleSortByScore.bind(this);
     this.handleSortByDate = this.handleSortByDate.bind(this);
   }
@@ -32,11 +32,13 @@ class Dashboard extends Component {
     return (
       <>
         <Container className="dashboard-container">
-          <SortingOptions 
-            list={this.props.posts} 
-            sortByScore={this.handleSortByScore}
-            sortByDate={this.handleSortByDate}
-          />
+          {postIds.length > 0 &&
+            <SortingOptions
+              list={this.props.posts}
+              sortByScore={this.handleSortByScore}
+              sortByDate={this.handleSortByDate}
+            />
+          }
           {postIds.length > 0 ? (
             postIds.map((id) => (
               <Post key={id} id={id} />

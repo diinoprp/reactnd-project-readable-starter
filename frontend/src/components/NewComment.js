@@ -59,7 +59,7 @@ class NewComment extends Component {
             />
           </Form.Group>
 
-          <Button variant="primary" size="lg" block type="submit">
+          <Button variant="flat" size="lg" block type="submit">
             Comment
           </Button>
         </Form>

@@ -23,12 +23,6 @@ class CategoriesDropdown extends Component {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
           <NavDropdown title={dropdownTitle} id="collasible-nav-dropdown">
-            <Link to='/' style={{ textDecoration: 'none' }}>
-              <NavDropdown.Item>
-                All
-              </NavDropdown.Item>
-            </Link>
-
             {(categories && categories.length) &&
               categories.map((category) => (
                 <NavDropdown.Item

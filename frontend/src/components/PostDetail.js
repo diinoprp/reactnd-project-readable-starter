@@ -26,7 +26,7 @@ class PostDetail extends Component {
         <Post key={id} id={id} />
         <hr style={{ backgroundColor: 'white' }} />
         <h2>Comments:</h2>
-        <NewComment postId={id}/>
+        <NewComment postId={id} />
         <hr style={{ backgroundColor: 'white' }} />
         <CommentsList postId={id} />
       </Container>

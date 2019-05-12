@@ -92,7 +92,7 @@ class EditPost extends Component {
           </Form.Group>
 
           <Button
-            variant="primary"
+            variant="flat"
             size="lg"
             block
             type="submit">

@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { handleCreatePost } from '../actions'
 import uuid from "uuid";
 import { Redirect } from 'react-router-dom'
+import '../App.scss';
 
 class NewPost extends Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class NewPost extends Component {
     return (
       <Container className="dashboard-container">
         <h1>Create Post</h1>
-        <hr style={{backgroundColor: 'white'}} />
+        <hr style={{ backgroundColor: 'white' }} />
         <Form onSubmit={this.handleSubmit}>
           <Form.Group controlId="postAuthor">
             <Form.Control
@@ -82,8 +83,7 @@ class NewPost extends Component {
               onChange={(e) => this.setState({ body: e.target.value })}
             />
           </Form.Group>
-
-          <Button variant="primary" size="lg" block type="submit">
+          <Button variant="flat" size="lg" block type="submit">
             Post
           </Button>
         </Form>

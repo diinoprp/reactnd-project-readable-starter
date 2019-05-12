@@ -29,11 +29,13 @@ class CommentsList extends Component {
     const { comments } = this.props
     return (
       <>
+      {comments && comments.length > 0 && 
         <SortingOptions
           list={comments}
           sortByScore={this.handleSortByScore}
           sortByDate={this.handleSortByDate}
         />
+      }
         {comments.map((comment) => (
           <Comment key={comment.id} comment={comment} />
         ))}
