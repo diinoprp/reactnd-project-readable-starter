@@ -49,7 +49,7 @@ class Post extends Component {
     return (
       <Card className='post-card'>
         <Card.Header>
-          <Link to={`/postDetail/${id}`} style={{ textDecoration: 'none' }}>
+          <Link to={`/${category}/${id}`} style={{ textDecoration: 'none' }}>
             <Card.Title className='post-card-title'>
               <h1>
                 {title}

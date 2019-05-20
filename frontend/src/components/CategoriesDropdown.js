@@ -12,7 +12,7 @@ class CategoriesDropdown extends Component {
   }
 
   handleCategoryClick(categoryName) {
-    this.props.history.push(`/categories/${categoryName}`)
+    this.props.history.push(`/${categoryName}`)
     this.setState({ dropdownTitle: categoryName })
   }
 

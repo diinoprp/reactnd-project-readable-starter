@@ -3,9 +3,9 @@ import Navbar from 'react-bootstrap/Navbar'
 import CategoriesDropdown from './CategoriesDropdown'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
+import { Route } from "react-router-dom";
 
 const Menu = (props) => {
-  const { pathname } = props.location
   return (
     <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
       <Link to='/'>
@@ -19,7 +19,7 @@ const Menu = (props) => {
         </Navbar.Brand>
       </Link>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      {pathname === '/' ? <CategoriesDropdown /> : null}
+      <Route exact path={["/", "/:category"]} component={CategoriesDropdown} />
     </Navbar>
   )
 }
