@@ -127,7 +127,7 @@ export const handleEditPost = (id, title, body) => dispatch => (
     .then(post => dispatch(editPost(post)))
 )
 
-function editPost (post) {
+function editPost(post) {
   return {
     type: actions.EDIT_POST,
     post
@@ -136,7 +136,10 @@ function editPost (post) {
 
 export const handleDeleteComment = (id) => dispatch => (
   API.deleteComment(id)
-    .then(comment => dispatch(deleteComment(comment)))
+    .then((comment) => {
+      dispatch(deleteComment(comment))
+      dispatch(handleReceivePosts())
+    })
 )
 
 function deleteComment(comment) {
@@ -160,7 +163,10 @@ function editComment(comment) {
 
 export const handleCreateComment = (id, timestamp, body, author, parentId) => dispatch => (
   API.createComment(id, timestamp, body, author, parentId)
-    .then(comment => dispatch(createComment(comment)))
+    .then(({ comment }) => {
+      dispatch(createComment(comment))
+      dispatch(handleReceivePosts())
+    })
 )
 
 function createComment(comment) {
