@@ -8,6 +8,7 @@ import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as actions from '../actions'
 import OptionsMenu from './OptionsMenu';
+import { Redirect } from 'react-router-dom'
 
 class Post extends Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class Post extends Component {
     const { post } = this.props
 
     if (!post) {
-      return null
+      return <Redirect to='/notFound' />
     }
 
     const {

@@ -11,10 +11,6 @@ import * as actions from '../actions'
 class Dashboard extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      toHome: false
-    }
-
     this.handleSortByScore = this.handleSortByScore.bind(this);
     this.handleSortByDate = this.handleSortByDate.bind(this);
   }
